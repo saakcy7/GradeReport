@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const authRoutes = require('./routes/auth.route');
-const studentRoutes = require('./routes/student.route');
-const resultRoutes = require('./routes/result.route');
-const reportRoutes = require('./routes/report.route');
+const authRoutes = require('./src/routes/auth.route');
+const studentRoutes = require('./src/routes/student.route');
+const resultRoutes = require('./src/routes/result.route');
+const reportRoutes = require('./src/routes/report.route');
 
 
 dotenv.config();

@@ -2,6 +2,11 @@ const Student = require('../Models/Student.model');
 const User = require('../Models/User.model');
 
 exports.addStudent = async (req, res) => {
+  const existingUser = await User.findOne({ email });
+
+if (existingUser) {
+  return res.status(400).json({ error: "Email already registered" });
+}
   const { name, email, password, rollNumber, class: cls, section } = req.body;
 
   const user = new User({ name, email, password, role: 'student' });
