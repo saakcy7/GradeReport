@@ -1,24 +1,45 @@
-const Student = require('../Models/Student.model');
-const User = require('../Models/User.model');
+const Student = require('../Models/Student.model'); // adjust path if needed
 
 exports.addStudent = async (req, res) => {
-  const existingUser = await User.findOne({ email });
+  try {
+    const { user, rollNumber, className, section } = req.body;
 
-if (existingUser) {
-  return res.status(400).json({ error: "Email already registered" });
-}
-  const { name, email, password, rollNumber, class: cls, section } = req.body;
+    // Check for required fields
+    if (!user || !rollNumber || !className) {
+      return res.status(400).json({ error: 'Required fields are missing.' });
+    }
 
-  const user = new User({ name, email, password, role: 'student' });
-  await user.save();
+    // Optional: check if a student with this user or roll number already exists
+    const existing = await Student.findOne({
+      $or: [{ user }, { rollNumber }]
+    });
 
-  const student = new Student({ user: user._id, rollNumber, class: cls, section });
-  await student.save();
+    if (existing) {
+      return res.status(400).json({ error: 'Student already exists.' });
+    }
 
-  res.json({ message: 'Student created' });
+    // Create and save the student
+    const student = new Student({
+      user,
+      rollNumber,
+      className,
+      section
+    });
+
+    await student.save();
+
+    res.status(201).json({ message: 'Student added successfully.', student });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error. Could not add student.' });
+  }
 };
-
-exports.getAllStudents = async (req, res) => {
-  const students = await Student.find().populate('user');
-  res.json(students);
+exports.getStudents = async (req, res) => {
+  try {
+    const students = await Student.find().populate('user', 'name email');
+    res.status(200).json(students);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error. Could not fetch students.' });
+  }
 };
