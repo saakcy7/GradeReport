@@ -18,6 +18,9 @@ export default function Navbar() {
           <li>
             <Link to="/add-result" className="hover:text-gray-300 transition duration-300">Add Result</Link>
           </li>
+          <li> 
+            <Link to="/login" className="hover:text-gray-300 transition duration-300">login/signup</Link>
+          </li>
         </ul>
         <div className="md:hidden">
           <button className="text-white focus:outline-none">
