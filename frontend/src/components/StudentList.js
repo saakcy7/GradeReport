@@ -1,9 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); // or sessionStorage.getItem('token')
+    if (!token) {
+      toast.error('Unauthorized. Please log in again.');
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:5000/students');
@@ -16,12 +31,17 @@ export default function StudentList() {
         console.error('Error fetching students:', error.message);
       }
     };
+
     fetchData();
-  }, []);
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return null; // or a loading spinner
+  }
 
   // Group by class and section
   const grouped = students.reduce((acc, student) => {
-    const key = `${student.class}-${student.section}`;
+    const key = `${student.className}-${student.section}`;
     if (!acc[key]) acc[key] = [];
     acc[key].push(student);
     return acc;
@@ -42,7 +62,7 @@ export default function StudentList() {
             <ul className="divide-y divide-gray-200">
               {groupStudents.map(student => (
                 <li key={student._id} className="py-2 flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">{student.user.name}</span>
+                  <span className="text-gray-700 font-medium">{student.studentName}</span>
                   <span className="text-sm text-gray-500">Roll: {student.rollNumber}</span>
                 </li>
               ))}

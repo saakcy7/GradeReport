@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import image1 from '../assets/image1.png'; // Ensure this is the correct image path
-
 export default function Home() {
   return (
+    <>
     <div className="min-h-screen bg-[#e6f4fb] flex items-center justify-center px-4 md:px-12 py-12">
       <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
@@ -47,5 +47,6 @@ className=" w-full max-w-[500px] object-contain md:h-auto h-64"
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -46,12 +46,13 @@ exports.addStudent = async (req, res) => {
 
 
 
-exports.getStudents = async (req, res) => {
+exports.getAllStudents = async (req, res) => {
   try {
-    const students = await Student.find().populate('user', 'name email');
+    const students = await Student.find(); // No populate needed
     res.status(200).json(students);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error. Could not fetch students.' });
   }
 };
+
