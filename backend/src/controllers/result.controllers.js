@@ -27,7 +27,10 @@ const { rollNumber, subjects, term } = req.body;
 if (!rollNumber || !subjects || !term || !Array.isArray(subjects) || subjects.length === 0) {
   return res.status(400).json({ error: 'All fields are required (rollNumber, subjects, term)' });
 }
-
+const student = await Student.findOne({ rollNumber });
+if (!student) {
+  return res.status(404).json({ error: 'Student not found.' });
+}
 
 // Check for existing result
 const existingResult = await Result.findOne({ rollNumber, term });

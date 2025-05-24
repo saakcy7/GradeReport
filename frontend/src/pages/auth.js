@@ -86,7 +86,7 @@ export default function AuthForm() {
           localStorage.setItem('token', data.token);
           toast.success('Login successful!');
           setTimeout(() => {
-            window.location.href = '/dashboard';
+            window.location.href = '/dashboard'; // Redirect to dashboard after login
           }, 1500);
         } else {
           toast.success('Account created successfully!');

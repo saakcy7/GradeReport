@@ -9,6 +9,8 @@ import ReportCard from './components/ReportCard';
 import CheckResults from './components/CheckResults'; // Optional if used in a page
 import AddResult from './components/AddResult'; // Optional if used in a page
 // import ReportCard from './components/ReportCard'; // Optional if used in a page
+import About from './pages/about'; // Optional if used in a page
+import Contact from './pages/contact'; // Optional if used in a page
 
 function App() {
   return (
@@ -23,6 +25,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/getresults" element={<CheckResults/>}/>
         <Route path="/getreport" element={<ReportCard />} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/contact" element={<Contact />} />
+        
+
         
         {/* You can add a ReportCard page like: */}
         {/* <Route path="/report/:studentId" element={<ReportCard />} /> */}
