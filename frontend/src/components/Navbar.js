@@ -52,6 +52,17 @@ export default function Navbar() {
               <FaClipboardList /> <span>Add Result</span>
             </Link>
           </li>
+          <li>
+            <Link to="/getresults"  className="flex items-center space-x-1 hover:text-cyan-200 transition duration-300">
+              <FaClipboardList /> <span>Get Results</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/getreport" className="flex items-center space-x-1 hover:text-cyan-200 transition duration-300">
+              <FaClipboardList /> <span>Get Report</span>
+            </Link>
+          </li>
+          
           {!hideLogin && (
             <li>
               <Link to="/login" className="flex items-center space-x-1 hover:text-cyan-200 transition duration-300">

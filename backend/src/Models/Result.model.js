@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const resultSchema = new mongoose.Schema({
-  student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
+  rollNumber: { type: String, required: true },
   subjects: [
     {
       name: { type: String, required: true },
@@ -10,6 +10,7 @@ const resultSchema = new mongoose.Schema({
     }
   ],
   term: { type: String }, // e.g., "Midterm", "Final"
+  year: { type: Number }, // e.g., 2023
 });
 
 

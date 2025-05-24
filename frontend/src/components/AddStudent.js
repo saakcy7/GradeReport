@@ -51,26 +51,46 @@ export default function AddStudent() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Add Student</h2>
-      <form onSubmit={handleSubmit} className="space-y-3">
-        {['studentName','rollNumber', 'className', 'section'].map((field) => (
+    <div
+      className="max-w-md mx-auto mt-10 p-6 rounded-lg shadow-lg"
+      style={{ backgroundColor: '#ffffff' }}
+    >
+      <h2
+        className="text-2xl font-extrabold mb-6 text-center"
+        style={{ color: '#2f4858' }} // Soft Navy
+      >
+        Add Student
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {['studentName', 'rollNumber', 'className', 'section'].map((field) => (
           <input
             key={field}
             type="text"
             name={field}
-            placeholder={field}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
             value={formData[field]}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 rounded-md focus:outline-none"
+            style={{
+              border: '2px solid #56c4e0', // Sky Blue
+              color: '#2f4858', // Soft Navy text
+              fontWeight: '500',
+            }}
             required
           />
         ))}
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+
+        <button
+          type="submit"
+          className="w-full py-3 rounded-lg font-bold text-white transition-colors duration-300"
+          style={{ backgroundColor: '#2f4858' }} // Soft Navy
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3cb2cc')} // Teal Blue hover
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#2f4858')}
+        >
           Add Student
         </button>
       </form>
-      {/* ToastContainer should be inside your component tree */}
+
       <ToastContainer
         position="top-right"
         autoClose={3000}
