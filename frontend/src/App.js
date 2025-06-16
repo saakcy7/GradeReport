@@ -3,11 +3,11 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AuthForm from './pages/auth';
 import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
+import AddStudent from './pages/AddStudent';
 import Dashboard from './pages/Dashboard';
-import ReportCard from './components/ReportCard';
-import CheckResults from './components/CheckResults'; // Optional if used in a page
-import AddResult from './components/AddResult'; // Optional if used in a page
+import ReportCard from './pages/ReportCard';
+import CheckResults from './pages/CheckResults'; // Optional if used in a page
+import AddResult from './pages/AddResult'; // Optional if used in a page
 // import ReportCard from './components/ReportCard'; // Optional if used in a page
 import About from './pages/about'; // Optional if used in a page
 import Contact from './pages/contact'; // Optional if used in a page

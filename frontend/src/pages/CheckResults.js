@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-export default function CheckResults() {
+const CheckResults=()=> {
   const [rollNumber, setRollNumber] = useState('');
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
@@ -92,3 +92,4 @@ export default function CheckResults() {
     </div>
   );
 }
+export default CheckResults;

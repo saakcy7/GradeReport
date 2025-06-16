@@ -1,175 +1,228 @@
 import { Link } from 'react-router-dom';
+import { FaUserGraduate, FaChartLine, FaFilePdf, FaBell, FaCog, FaSearch } from 'react-icons/fa';
+import { MdDashboard, MdAssignment, MdPeople, MdSchool } from 'react-icons/md';
 import image1 from '../assets/image1.jpg';
 
 export default function Dashboard() {
-  return (
-    <>
-      {/* Hero Section with Quick Actions */}
-      <div className="min-h-screen bg-[#e6f4fb] flex items-center justify-center px-4 md:px-12 py-12">
-        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#1d3557] leading-tight">
-              Result Management System
-            </h1>
-            <p className="text-base md:text-lg text-[#457b9d] max-w-xl mx-auto md:mx-0">
-              Manage students, add results, and generate report cards seamlessly.
-              Designed for schools and colleges to simplify academic workflows.
-            </p>
+  // Sample data for statistics
+  const stats = [
+    { value: '1,245', label: 'Total Students', icon: <FaUserGraduate className="text-2xl" /> },
+    { value: '87%', label: 'Pass Percentage', icon: <FaChartLine className="text-2xl" /> },
+    { value: '4.2', label: 'Average GPA', icon: <MdSchool className="text-2xl" /> },
+    { value: '632', label: 'Reports Generated', icon: <FaFilePdf className="text-2xl" /> }
+  ];
 
-            {/* Quick Actions */}
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto md:mx-0 pt-4">
-  <Link
-    to="/add-student"
-    className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
-  >
-    Add Student
-  </Link>
-  <Link
-    to="/students"
-    className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
-  >
-    View Students
-  </Link>
-  <Link
-    to="/add-result"
-    className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
-  >
-    Add Result
-  </Link>
-  <Link
-    to="/results"
-    className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
-  >
-    Get Results
-  </Link>
-  <Link
-    to="/generate-report"
-    className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
-  >
-    Generate Report
-  </Link>
-</div>
+  // Recent activities
+  const activities = [
+    { id: 1, action: 'New result added for Class 10A', time: '2 mins ago' },
+    { id: 2, action: 'Report card generated for Student #2456', time: '15 mins ago' },
+    { id: 3, action: 'New student registered', time: '1 hour ago' },
+    { id: 4, action: 'System update completed', time: '3 hours ago' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation Bar */}
+      <nav className="bg-[#1d3557] text-white p-4 shadow-md">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <MdDashboard className="text-2xl" />
+            <span className="text-xl font-bold">GradeMaster</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button className="p-2 rounded-full hover:bg-[#2a4365]">
+              <FaBell />
+            </button>
+            <button className="p-2 rounded-full hover:bg-[#2a4365]">
+              <FaCog />
+            </button>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-full bg-[#3cb2cc] flex items-center justify-center">
+                <span className="font-semibold">A</span>
+              </div>
+              <span className="hidden md:inline">Admin</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-sm flex items-center space-x-4">
+              <div className="p-3 rounded-full bg-[#e6f4fb] text-[#3cb2cc]">
+                {stat.icon}
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-[#1d3557]">{stat.value}</p>
+                <p className="text-sm text-gray-500">{stat.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Hero Section */}
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              <div className="p-8">
+                <h1 className="text-3xl font-bold text-[#1d3557] mb-4">Welcome back, Administrator</h1>
+                <p className="text-[#457b9d] mb-6">
+                  Manage students, add results, and generate report cards seamlessly. 
+                  Designed for schools and colleges to simplify academic workflows.
+                </p>
+                
+                {/* Search Bar */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaSearch className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-[#3cb2cc] focus:border-transparent"
+                    placeholder="Search students, classes, or results..."
+                  />
+                </div>
+
+                {/* Quick Actions */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <DashboardAction 
+                    icon={<MdPeople className="text-2xl" />} 
+                    label="Students" 
+                    to="/students" 
+                    color="bg-[#3cb2cc]" 
+                  />
+                  <DashboardAction 
+                    icon={<MdAssignment className="text-2xl" />} 
+                    label="Results" 
+                    to="/results" 
+                    color="bg-[#4caf50]" 
+                  />
+                  <DashboardAction 
+                    icon={<FaFilePdf className="text-2xl" />} 
+                    label="Reports" 
+                    to="/reports" 
+                    color="bg-[#ff9800]" 
+                  />
+                  <DashboardAction 
+                    icon={<MdSchool className="text-2xl" />} 
+                    label="Classes" 
+                    to="/classes" 
+                    color="bg-[#9c27b0]" 
+                  />
+                  <DashboardAction 
+                    icon={<FaChartLine className="text-2xl" />} 
+                    label="Analytics" 
+                    to="/analytics" 
+                    color="bg-[#e91e63]" 
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Activities */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <h2 className="text-xl font-bold text-[#1d3557] mb-4">Recent Activities</h2>
+              <div className="space-y-4">
+                {activities.map(activity => (
+                  <div key={activity.id} className="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg transition">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-[#3cb2cc]"></div>
+                    <div>
+                      <p className="text-gray-800">{activity.action}</p>
+                      <p className="text-xs text-gray-500">{activity.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Link to="/activities" className="mt-4 inline-block text-[#3cb2cc] text-sm font-medium hover:underline">
+                View all activities
+              </Link>
+            </div>
           </div>
 
-               <div className="flex justify-center self-center">
-            <div className="rounded-3xl overflow-hidden shadow-xl  p-2 bg-white">
-              <img
-                src={image1}
-                alt="Result Management"
-                className="w-full max-w-[600px] object-contain h-auto"
-              />
+          {/* Right Column */}
+          <div className="space-y-8">
+            {/* Announcements */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <h2 className="text-xl font-bold text-[#1d3557] mb-4">Announcements</h2>
+              <div className="space-y-4">
+                <div className="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                  <p className="font-medium text-blue-800">Mid-term exams schedule released</p>
+                  <p className="text-xs text-blue-600 mt-1">2 days ago</p>
+                </div>
+                <div className="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                  <p className="font-medium text-yellow-800">System maintenance this weekend</p>
+                  <p className="text-xs text-yellow-600 mt-1">5 days ago</p>
+                </div>
+                <div className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                  <p className="font-medium text-green-800">New feature: Bulk result upload</p>
+                  <p className="text-xs text-green-600 mt-1">1 week ago</p>
+                </div>
+              </div>
+              <button className="mt-4 w-full py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition">
+                View all announcements
+              </button>
+            </div>
+
+            {/* Quick Links */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <h2 className="text-xl font-bold text-[#1d3557] mb-4">Quick Links</h2>
+              <div className="space-y-2">
+                <Link to="/help" className="block p-2 hover:bg-gray-50 rounded transition text-gray-700">
+                  Help Center
+                </Link>
+                <Link to="/tutorials" className="block p-2 hover:bg-gray-50 rounded transition text-gray-700">
+                  Video Tutorials
+                </Link>
+                <Link to="/support" className="block p-2 hover:bg-gray-50 rounded transition text-gray-700">
+                  Contact Support
+                </Link>
+                <Link to="/settings" className="block p-2 hover:bg-gray-50 rounded transition text-gray-700">
+                  System Settings
+                </Link>
+              </div>
+            </div>
+
+            {/* System Status */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <h2 className="text-xl font-bold text-[#1d3557] mb-4">System Status</h2>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Database</span>
+                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Operational</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">API</span>
+                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Operational</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Storage</span>
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">65% used</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Last Backup</span>
+                  <span className="text-gray-500 text-sm">Today, 02:00 AM</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Info Cards Section */}
-      <section className="bg-white py-20 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-          <InfoCard
-            title="Instant Report Cards"
-            description="Automatically generate well-formatted report cards with just one click."
-          />
-          <InfoCard
-            title="Secure Data Storage"
-            description="Student data is encrypted and accessible only by authorized personnel."
-          />
-          <InfoCard
-            title="Time-saving Automation"
-            description="Say goodbye to manual processes with automated result management workflows."
-          />
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="bg-[#f9fbfc] py-20 px-4 md:px-12">
-        <div className="max-w-6xl mx-auto text-center space-y-12">
-          <h2 className="text-3xl font-bold text-[#1d3557]">What Educators Are Saying</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Ms. Caroline',
-                feedback: 'This system saves hours of paperwork and automates everything. Absolutely love it!',
-              },
-              {
-                name: 'Principal D. Kumar',
-                feedback: 'Secure, easy to use, and reliable. Our school has seen a 40% drop in admin time.',
-              },
-              {
-                name: 'Prof. Elaine',
-                feedback: 'A must-have for any modern institution. Report generation is super fast and clean.',
-              },
-            ].map((t, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl shadow-md text-left">
-                <p className="text-[#457b9d] mb-4">“{t.feedback}”</p>
-                <h4 className="text-[#1d3557] font-semibold">{t.name}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call-to-Action Section */}
-      <section className="bg-[#3cb2cc] py-16 px-4 md:px-12 text-white text-center">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">Ready to Streamline Your Academic Records?</h2>
-          <p className="text-lg md:text-xl">Start using Grade Report today — it's free, fast, and secure.</p>
-          <Link
-            to="/register"
-            className="inline-block bg-white text-[#3cb2cc] px-6 py-3 rounded-md shadow-md font-semibold hover:bg-gray-100 transition"
-          >
-            Get Started Now
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-[#1d3557] text-white py-12 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h4 className="text-xl font-bold mb-2">Grade Report</h4>
-            <p className="text-sm text-cyan-100">
-              Simplifying academic management for schools and colleges with modern tools.
-            </p>
-            <p className="text-sm text-cyan-100 mt-4">© {new Date().getFullYear()} All rights reserved.</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="hover:underline text-cyan-200">About Us</Link></li>
-              <li><Link to="/contact" className="hover:underline text-cyan-200">Contact</Link></li>
-              <li><Link to="/privacy" className="hover:underline text-cyan-200">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:underline text-cyan-200">Terms & Conditions</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-2">Contact</h4>
-            <p className="text-sm text-cyan-200">Email: support@gradereport.com</p>
-            <p className="text-sm text-cyan-200">Phone: +1 234 567 8900</p>
-            <p className="text-sm text-cyan-200">Address: 123 Education St, Cityville</p>
-          </div>
-        </div>
-      </footer>
-    </>
+    </div>
   );
 }
 
-function DashboardLink({ to, label }) {
+function DashboardAction({ icon, label, to, color }) {
   return (
     <Link
       to={to}
-      className="px-4 py-3 bg-[#3cb2cc] text-white text-center rounded-md shadow hover:bg-[#2f9bb5] transition font-semibold"
+      className={`${color} text-white p-4 rounded-lg flex flex-col items-center justify-center space-y-2 hover:opacity-90 transition shadow-sm`}
     >
-      {label}
+      <div>{icon}</div>
+      <span className="text-sm font-medium">{label}</span>
     </Link>
-  );
-}
-
-function InfoCard({ title, description }) {
-  return (
-    <div className="bg-[#f1f9fc] p-10 rounded-2xl shadow-lg hover:shadow-xl transition">
-      <h3 className="text-2xl font-bold text-[#1d3557] mb-4">{title}</h3>
-      <p className="text-[#457b9d] text-lg">{description}</p>
-    </div>
   );
 }
